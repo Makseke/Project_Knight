@@ -320,12 +320,43 @@ MonoBehaviour:
   touchStartPosition: {x: 0, y: 0}
   touchEndPosition: {x: 0, y: 0}
   touchfinalPosition: {x: 0, y: 0}
-  speed: 1
+  movemetCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.3
+      value: 5
+      inSlope: -0.0159635
+      outSlope: -0.0159635
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.3938918
+      outWeight: 0.286019
+    - serializedVersion: 3
+      time: 1
+      value: 5
+      inSlope: 0.013763118
+      outSlope: 0.013763118
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.28609627
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   isMoving: 0
-  inProcess: 0
-  moveDirection: 0
   startPosition: {x: 0, y: 0}
   endPosition: {x: 0, y: 0}
+  time: 0
 --- !u!1 &1465137175
 GameObject:
   m_ObjectHideFlags: 0
