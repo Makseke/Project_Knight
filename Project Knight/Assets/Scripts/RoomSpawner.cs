@@ -5,6 +5,7 @@ using UnityEngine;
 public class RoomSpawner : MonoBehaviour
 {
     private RoomsType variants;
+    private Rigidbody2D player;
     private int rand;
     private bool spawned = false;
     private float waitTime = 3f;
@@ -12,8 +13,9 @@ public class RoomSpawner : MonoBehaviour
     void Start()
     {
         variants = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomsType>();
-        Destroy(gameObject, waitTime);
-        Invoke("Spawn", 0.2f);
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+        //Destroy(gameObject, waitTime);
+        //Invoke("Spawn", 0.2f);
     }
 
     public void Spawn()
@@ -28,7 +30,7 @@ public class RoomSpawner : MonoBehaviour
 
     private void DoubleSpawn(Collider2D other)
     {
-        if(other.CompareTag("RoomPoint") && other.GetComponent<RoomSpawner>().spawned)
+        if (other.CompareTag("RoomPoint") && other.GetComponent<RoomSpawner>().spawned)
         {
             Destroy(gameObject);
         }
@@ -36,6 +38,10 @@ public class RoomSpawner : MonoBehaviour
 
     void Update()
     {
-        
+        if (player.position.y > transform.position.y - 11)
+        {
+            Spawn();
+            Destroy(gameObject);
+        }
     }
 }
