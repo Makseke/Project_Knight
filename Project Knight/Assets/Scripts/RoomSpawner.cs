@@ -38,7 +38,7 @@ public class RoomSpawner : MonoBehaviour
 
     void Update()
     {
-        if (player.position.y > transform.position.y - 11)
+        if (player.position.y > transform.position.y - 33)
         {
             Spawn();
             Destroy(gameObject);

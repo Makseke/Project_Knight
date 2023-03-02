@@ -2,7 +2,7 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.U2D.Animation;
+//using UnityEditor.U2D.Animation;
 
 public class CameraFollow : MonoBehaviour
 {
@@ -22,18 +22,10 @@ public class CameraFollow : MonoBehaviour
     //Следование камеры за персонажем по оси Y
     void LateUpdate()
     {
-        //Vector2 temp = transform.position;
-
-        
-        
         if (player.position.y > cameraPos.position.y)
         {
-            //temp = new Vector3(0, player.position.y, -10);
-            //transform.position = temp;
             cameraPos.position = new Vector3(0, player.position.y, -10);
         } 
-            
-        
     }
 }
 
