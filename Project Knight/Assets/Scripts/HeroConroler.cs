@@ -25,7 +25,9 @@ using UnityEngine;
     public Vector2 endPosition;
     public float time;
 
-    //отвечает за передвижение персонажа
+    public float last_dif_1;
+    public float last_dif_2;
+
     private void Move()
     {
         //проверка движения персонажа
@@ -34,19 +36,23 @@ using UnityEngine;
             isMoving = true;
         }
         //если персонаж находится в движении то просчитывается вектор движения исходя из кривой анимации
-        if (isMoving == true && time < 1)
+        if (isMoving == true && Mathf.Abs(last_dif_1) >= Mathf.Abs(last_dif_2))
         {
             speed = movemetCurve.Evaluate(time);
             hero.position = Vector2.MoveTowards(hero.position, endPosition, speed * Time.fixedDeltaTime);
+
+            last_dif_2 = last_dif_1;
+            last_dif_1 = Mathf.Abs((startPosition.x - hero.position.x) + (startPosition.y - hero.position.y));
+
             time += Time.deltaTime;
         }
         //если персонаж не закончил движение в течении 1 секунды, перестраивает маршрут на последнюю клетку
-        else if (isMoving == true && time > 1)
+        else if (isMoving == true && Mathf.Abs(last_dif_1) < Mathf.Abs(last_dif_2))
         {
             speed = movemetCurve.Evaluate(time);
             hero.transform.position = Vector2.MoveTowards(hero.position, startPosition, speed * Time.fixedDeltaTime);
             time += Time.deltaTime;
-            isReverse= true;
+            isReverse = true;
         }
         //проверка закончил ли персонаж движение
         if (hero.position == endPosition && isReverse == false)
@@ -54,6 +60,8 @@ using UnityEngine;
             isMoving = false;
             isReverse = false;
             time = 0.0f;
+            last_dif_1 = 0.0f;
+            last_dif_2 = 0.0f;
         }
         //проверка вернулся ли персонаж на точку старта в случае столкновения с объектом
         else if (hero.position == startPosition && isReverse == true)
@@ -62,6 +70,8 @@ using UnityEngine;
             isReverse = false;
             time = 0.0f;
             endPosition = startPosition;
+            last_dif_1 = 0.0f;
+            last_dif_2 = 0.0f;
         }
     }
 

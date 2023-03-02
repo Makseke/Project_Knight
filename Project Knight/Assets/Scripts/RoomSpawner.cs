@@ -8,7 +8,7 @@ public class RoomSpawner : MonoBehaviour
     private Rigidbody2D player;
     private int rand;
     private bool spawned = false;
-    private float waitTime = 3f;
+    //private float waitTime = 3f;
 
     void Start()
     {

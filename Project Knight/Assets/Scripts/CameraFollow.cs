@@ -16,7 +16,7 @@ public class CameraFollow : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         cameraPos = GameObject.FindGameObjectWithTag("MainCamera").transform;
-        transform.position = new Vector3(0, player.position.y + 2.0f, -10);
+        transform.position = new Vector3(0, player.position.y + 5.0f, -10);
     }
 
     //Следование камеры за персонажем по оси Y
