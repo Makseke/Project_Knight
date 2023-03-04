@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RoomSpawner : MonoBehaviour
 {
-    private RoomsType variants;
+    private LevelVariants variants;
     private Rigidbody2D player;
     private int rand;
     private bool spawned = false;
@@ -12,7 +12,7 @@ public class RoomSpawner : MonoBehaviour
 
     void Start()
     {
-        variants = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomsType>();
+        variants = GameObject.FindGameObjectWithTag("Rooms").GetComponent<LevelVariants>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
         //Destroy(gameObject, waitTime);
         //Invoke("Spawn", 0.2f);

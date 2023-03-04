@@ -92,7 +92,7 @@ using UnityEngine;
             //начало нажатия
             if (Input.GetTouch(0).phase == TouchPhase.Began)
             {
-                Debug.Log("start");
+                //Debug.Log("start");
                 touchStartPosition = Input.GetTouch(0).position;
                 touchEndPosition = Input.GetTouch(0).position;
             }
@@ -104,7 +104,7 @@ using UnityEngine;
             //конец нажатия или ошибка определения
             else if (Input.GetTouch(0).phase == TouchPhase.Canceled || Input.GetTouch(0).phase == TouchPhase.Ended)
             {
-                Debug.Log("end");
+                //Debug.Log("end");
                 float x_dif = 0;
                 float y_dif = 0;
                 //высчитывается разница между x и y координатами начала и конца тача

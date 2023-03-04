@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2923028838354783281}
   - component: {fileID: 6871723497372605903}
   - component: {fileID: 6471230484848030406}
-  - component: {fileID: 1655457824506112219}
+  - component: {fileID: 7713741832671815161}
   m_Layer: 0
   m_Name: LevelSpawner
   m_TagString: RoomPoint
@@ -106,7 +106,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1655457824506112219
+--- !u!114 &7713741832671815161
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -9,6 +9,8 @@ TagManager:
   - Wall
   - Undefined
   - Rooms
+  - HP
+  - max HP
   layers:
   - Default
   - TransparentFX
