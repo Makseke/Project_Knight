@@ -24,6 +24,9 @@ public class Cam : MonoBehaviour
 
         initialFov = componentCamera.fieldOfView;
         horizontalFov = CalcVerticalFov(initialFov, 1 / targetAspect);
+
+        Application.targetFrameRate = 60;
+        QualitySettings.vSyncCount = 0;
     }
 
     private void Update()
