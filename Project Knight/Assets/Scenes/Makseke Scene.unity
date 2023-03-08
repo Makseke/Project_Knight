@@ -169,7 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basicRooms:
   - {fileID: 4831755917506363375, guid: b6ad0f18d7902c64896796f955f0ac18, type: 3}
-  - {fileID: 4831755917506363375, guid: 2c0678941a11db24f8facaa2e990a670, type: 3}
+  - {fileID: 4831755917506363375, guid: 7412f8cc134e4cf48b7f262352cf7cef, type: 3}
 --- !u!1 &552977198
 GameObject:
   m_ObjectHideFlags: 0
