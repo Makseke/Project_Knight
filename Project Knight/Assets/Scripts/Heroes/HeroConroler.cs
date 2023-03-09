@@ -28,12 +28,26 @@ using UnityEngine;
     public float last_dif_1;
     public float last_dif_2;
 
+    private WorldSettings worldSettings;
+    private bool lastMove_1;
+    private bool lastMove_2;
+
+    private void WorldMove()
+    {
+        if (lastMove_1 == false && lastMove_2 == true)
+        {
+            worldSettings.move += 1;
+        }
+    }
+
     private void Move()
     {
         //проверка движения персонажа
         if (endPosition != hero.position && isReverse == false)
         {
             isMoving = true;
+            lastMove_2 = lastMove_1;
+            lastMove_1 = isMoving;
         }
         //если персонаж находится в движении то просчитывается вектор движения исходя из кривой анимации
         if (isMoving == true && Mathf.Abs(last_dif_1) >= Mathf.Abs(last_dif_2))
@@ -62,6 +76,8 @@ using UnityEngine;
             time = 0.0f;
             last_dif_1 = 0.0f;
             last_dif_2 = 0.0f;
+            lastMove_2 = lastMove_1;
+            lastMove_1 = isMoving;
         }
         //проверка вернулся ли персонаж на точку старта в случае столкновения с объектом
         else if (hero.position == startPosition && isReverse == true)
@@ -72,6 +88,8 @@ using UnityEngine;
             endPosition = startPosition;
             last_dif_1 = 0.0f;
             last_dif_2 = 0.0f;
+            lastMove_2 = lastMove_1;
+            lastMove_1 = isMoving;
         }
     }
 
@@ -79,14 +97,18 @@ using UnityEngine;
     void Start()
     {
         hero = GetComponent<Rigidbody2D>();
+        worldSettings = GameObject.FindGameObjectWithTag("World Settings").GetComponent<WorldSettings>();
         time = Time.fixedDeltaTime;
         endPosition = hero.position;
+        lastMove_2 = false;
+        lastMove_1 = false;
     }
 
     void Update()
     {
         //вызов метода для движения
         Move();
+        WorldMove();
         //проверка количества тачей
         if (Input.touchCount == 1) {
             //начало нажатия

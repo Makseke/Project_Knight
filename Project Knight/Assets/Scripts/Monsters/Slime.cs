@@ -11,19 +11,31 @@ public class Slime : MonoBehaviour
     public GameObject player;
 
     public Vector2 monsterPosition;
+    public Vector2 playerPosition;
 
     public TextMeshProUGUI hp;
     public TextMeshProUGUI maxHp;
 
     public int healPoints;
+    public int atackPoints;
+
+    public void MoveToPlayer()
+    {
+
+    }
 
     void Start()
     {
         monster = GetComponent<Rigidbody2D>();
         trigerCollider = GetComponent<Collider2D>();
+
         player = GameObject.FindGameObjectWithTag("Player");
+
         monsterPosition = monster.transform.position;
+        //установка значений по умолчанию для очков здоровья и атаки
         healPoints = 100;
+        atackPoints = 10;
+        //создания графического интерфейса для отображения очков здоровья врага
         maxHp.text = healPoints.ToString();
         hp.gameObject.SetActive(false);
         maxHp.gameObject.SetActive(false);
@@ -32,10 +44,12 @@ public class Slime : MonoBehaviour
 
     void Update()
     {
+        //автоматическое удаление если игрок ушел слишком далеко
         if (player.transform.position.y > monster.transform.position.y + 33)
         {
             Destroy(gameObject);
         }
+        //отображение значений здоровья врагов
         hp.text = healPoints.ToString();
         if (Mathf.Abs(Mathf.Abs(player.transform.position.y) - Mathf.Abs(monster.transform.position.y)) <= 1 && Mathf.Abs(Mathf.Abs(player.transform.position.x) - Mathf.Abs(monster.transform.position.x)) <= 1)
         {
@@ -47,19 +61,14 @@ public class Slime : MonoBehaviour
             hp.gameObject.SetActive(false);
             maxHp.gameObject.SetActive(false);
         }
+
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            Debug.Log("hited by Player");
             player.GetComponent<HeroConroler>().endPosition = player.GetComponent<HeroConroler>().startPosition;
-            healPoints -= 20;
-        }
-        if (healPoints <= 0)
-        {
-            Destroy(gameObject);
         }
     }
 

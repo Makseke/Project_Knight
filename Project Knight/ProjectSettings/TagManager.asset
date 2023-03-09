@@ -12,6 +12,8 @@ TagManager:
   - HP
   - max HP
   - Structure
+  - Monster
+  - World Settings
   layers:
   - Default
   - TransparentFX

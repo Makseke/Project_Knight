@@ -170,6 +170,53 @@ MonoBehaviour:
   basicRooms:
   - {fileID: 4831755917506363375, guid: b6ad0f18d7902c64896796f955f0ac18, type: 3}
   - {fileID: 4831755917506363375, guid: 7412f8cc134e4cf48b7f262352cf7cef, type: 3}
+--- !u!1 &497559546
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 497559547}
+  - component: {fileID: 497559548}
+  m_Layer: 0
+  m_Name: World Settings
+  m_TagString: World Settings
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &497559547
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 497559546}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &497559548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 497559546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3209f40735fb1d449bc15768bff8be1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  difficult: 0
+  biom: 0
+  move: 0
 --- !u!1 &552977198
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,6 +344,14 @@ PrefabInstance:
     - target: {fileID: 4166866184532426813, guid: 84f4eae75e3fc4a4a98251c5ed5c9d65, type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6330465888331351134, guid: 84f4eae75e3fc4a4a98251c5ed5c9d65, type: 3}
+      propertyPath: movemetCurve.m_Curve.Array.data[2].time
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6330465888331351134, guid: 84f4eae75e3fc4a4a98251c5ed5c9d65, type: 3}
+      propertyPath: movemetCurve.m_Curve.Array.data[3].time
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6330465888331351134, guid: 84f4eae75e3fc4a4a98251c5ed5c9d65, type: 3}
       propertyPath: movemetCurve.m_Curve.Array.data[0].value
@@ -453,7 +508,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3118312203272593707, guid: 5efdd44cfd9c9694c9de2e6afe9d08a8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3118312203272593707, guid: 5efdd44cfd9c9694c9de2e6afe9d08a8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -490,6 +545,10 @@ PrefabInstance:
     - target: {fileID: 8550398640051727969, guid: 5efdd44cfd9c9694c9de2e6afe9d08a8, type: 3}
       propertyPath: m_Name
       value: Slime
+      objectReference: {fileID: 0}
+    - target: {fileID: 8550398640051727969, guid: 5efdd44cfd9c9694c9de2e6afe9d08a8, type: 3}
+      propertyPath: m_TagString
+      value: Monster
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
