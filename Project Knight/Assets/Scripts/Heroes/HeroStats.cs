@@ -32,13 +32,13 @@ public class HeroStats : MonoBehaviour
         {
             if (player.position.y == (int)player.position.y && player.position.x == (int)player.position.x)
             {
-                Slime monster = collision.gameObject.GetComponent<Slime>();
+                BasicMonster monster = collision.gameObject.GetComponent<BasicMonster>();
                 health -= monster.atackPoints;
                 Debug.Log("M to H");
             }
             else
             {
-                Slime monster = collision.gameObject.GetComponent<Slime>();
+                BasicMonster monster = collision.gameObject.GetComponent<BasicMonster>();
                 monster.healPoints -= atack;
                 if (monster.healPoints <= 0)
                 {

@@ -4,7 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Slime : MonoBehaviour
+public class BasicMonster : MonoBehaviour
 {
     public Collider2D trigerCollider;
     public Rigidbody2D monster;
@@ -21,6 +21,7 @@ public class Slime : MonoBehaviour
 
     public void MoveToPlayer()
     {
+
 
     }
 

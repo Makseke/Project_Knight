@@ -467,7 +467,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3118312203272593707}
-  - component: {fileID: 7449640427023077600}
+  - component: {fileID: 1222912601928305504}
   - component: {fileID: 1793188677243318440}
   - component: {fileID: 8628782586027976688}
   m_Layer: 0
@@ -493,7 +493,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7449640427023077600
+--- !u!114 &1222912601928305504
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -502,16 +502,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 8550398640051727969}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41ea0f673c599fb4fa7b44c629f67fc1, type: 3}
+  m_Script: {fileID: 11500000, guid: bd57622a054c737468491f479343577e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   trigerCollider: {fileID: 0}
   monster: {fileID: 0}
   player: {fileID: 0}
   monsterPosition: {x: 0, y: 0}
+  playerPosition: {x: 0, y: 0}
   hp: {fileID: 7047331578485975841}
   maxHp: {fileID: 3878846304773812736}
   healPoints: 0
+  atackPoints: 0
 --- !u!61 &1793188677243318440
 BoxCollider2D:
   m_ObjectHideFlags: 0

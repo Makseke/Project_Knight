@@ -174,6 +174,12 @@ using UnityEngine;
                         }
                     }
                 }
+                else
+                {
+                    lastMove_1 = false;
+                    lastMove_2 = true;
+                    WorldMove();
+                }
             }
         }
     }
