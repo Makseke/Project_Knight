@@ -71,6 +71,8 @@ using UnityEngine;
         //проверка закончил ли персонаж движение
         if (hero.position == endPosition && isReverse == false)
         {
+            hero.position = endPosition;
+
             isMoving = false;
             isReverse = false;
             time = 0.0f;
@@ -82,6 +84,8 @@ using UnityEngine;
         //проверка вернулся ли персонаж на точку старта в случае столкновения с объектом
         else if (hero.position == startPosition && isReverse == true)
         {
+            hero.position = endPosition;
+
             isMoving = false;
             isReverse = false;
             time = 0.0f;
@@ -184,9 +188,12 @@ using UnityEngine;
         }
     }
 
-    void FixedUpdate()
+    public void OnTriggerEnter2D(Collider2D collision)
     {
-        //Move();
+        if (collision.gameObject.tag == "Structure")
+        {
+            endPosition = startPosition;
+        }
     }
 }
 
