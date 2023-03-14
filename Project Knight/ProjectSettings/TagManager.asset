@@ -14,6 +14,7 @@ TagManager:
   - Structure
   - Monster
   - World Settings
+  - Monster Part
   layers:
   - Default
   - TransparentFX

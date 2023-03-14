@@ -52,7 +52,7 @@ public class BasicMonster : MonoBehaviour
         }
         //отображение значений здоровья врагов
         hp.text = healPoints.ToString();
-        if (Mathf.Abs(Mathf.Abs(player.transform.position.y) - Mathf.Abs(monster.transform.position.y)) <= 1 && Mathf.Abs(Mathf.Abs(player.transform.position.x) - Mathf.Abs(monster.transform.position.x)) <= 1)
+        if ((Mathf.Abs(Mathf.Abs(player.transform.position.y) - Mathf.Abs(monster.transform.position.y))) <= 1 && (Mathf.Abs(Mathf.Abs(player.transform.position.x) - Mathf.Abs(monster.transform.position.x))) <= 1)
         {
             hp.gameObject.SetActive(true);
             maxHp.gameObject.SetActive(true);
@@ -65,19 +65,19 @@ public class BasicMonster : MonoBehaviour
 
     }
 
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            player.GetComponent<HeroConroler>().endPosition = player.GetComponent<HeroConroler>().startPosition;
-        }
-    }
+    //public void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.tag == "Player")
+    //    {
+    //        player.GetComponent<HeroConroler>().endPosition = player.GetComponent<HeroConroler>().startPosition;
+    //    }
+    //}
 
-    public void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            monster.transform.position = monsterPosition;
-        }
-    }
+    //public void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.tag == "Player")
+    //    {
+    //        monster.transform.position = monsterPosition;
+    //    }
+    //}
 }

@@ -123,31 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &49522532 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8550398640051727969, guid: 5efdd44cfd9c9694c9de2e6afe9d08a8, type: 3}
-  m_PrefabInstance: {fileID: 1600593040}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &49522536
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 49522532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01503d7d6bd07e1488ecaa221713085d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monster: {fileID: 0}
-  monsterScript: {fileID: 0}
-  player: {fileID: 0}
-  worldSettings: {fileID: 0}
-  move: 0
-  structures: []
-  monsters: []
-  banPosition: []
 --- !u!1 &91721469
 GameObject:
   m_ObjectHideFlags: 0
@@ -681,10 +656,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8550398640051727969, guid: 5efdd44cfd9c9694c9de2e6afe9d08a8, type: 3}
-      insertIndex: 1
-      addedObject: {fileID: 49522536}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5efdd44cfd9c9694c9de2e6afe9d08a8, type: 3}
 --- !u!1001 &3568382393986148293
 PrefabInstance:

@@ -507,12 +507,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monster: {fileID: 0}
+  worldCheck: {fileID: 0}
   monsterScript: {fileID: 0}
   player: {fileID: 0}
   worldSettings: {fileID: 0}
   move: 0
   structures: []
+  monsters: []
   banPosition: []
+  movemetCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  isMoving: 0
+  isReverse: 0
+  startPosition: {x: 0, y: 0}
+  endPosition: {x: 0, y: 0}
+  time: 0
+  last_dif_1: 0
+  last_dif_2: 0
 --- !u!114 &1222912601928305504
 MonoBehaviour:
   m_ObjectHideFlags: 0
