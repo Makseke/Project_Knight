@@ -6,15 +6,16 @@ public class MonsterRenderer : MonoBehaviour
 {
     private WorldSettings worldSettings;
     private SpriteRenderer renderer;
+    public Sprite[] monsterSptite;
 
     void Start()
     {
         worldSettings = GameObject.FindGameObjectWithTag("World Settings").GetComponent<WorldSettings>();
         renderer = GetComponent<SpriteRenderer>();
-    }
 
-    void Update()
-    {
-        
+        if (worldSettings.difficult == 0)
+        {
+            renderer.sprite = monsterSptite[0];
+        }
     }
 }

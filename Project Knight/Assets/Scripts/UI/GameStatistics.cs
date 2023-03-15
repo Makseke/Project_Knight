@@ -8,31 +8,31 @@ public class GameStatistics : MonoBehaviour
 {
 
     
-    public int ScoreOld;
-    public int ScoreNew;
-    private Transform Player;
+    public int score;
+    public int bestPlayerPosition;
+    private Rigidbody2D player;
 
     //Вывод Score на экран
     void OnGUI()
     {
         
-        GUI.Label(new Rect(460, 100, 150, 100), "Score: " + ScoreNew);
+        GUI.Label(new Rect(460, 100, 150, 100), "Score: " + score);
 
     }
 
     private void Start()
     {
-        Player = GameObject.FindGameObjectWithTag("Player").transform;
-        ScoreOld = 0;
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+        score = 0;
+        bestPlayerPosition = (int)player.position.y;
     }
     // Score зависит от позиции игрока
-    private void LateUpdate()
+    private void Update()
     {
-        ScoreOld = (int)Player.position.y;
-
-        if (ScoreOld > ScoreNew)
+        if (bestPlayerPosition < (int)player.position.y)
         {
-            ScoreNew = ScoreOld;
+            bestPlayerPosition = (int)player.position.y;
+            score++;
         }
 
     }
