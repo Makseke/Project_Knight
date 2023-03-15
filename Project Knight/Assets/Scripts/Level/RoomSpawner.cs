@@ -8,14 +8,11 @@ public class RoomSpawner : MonoBehaviour
     private Rigidbody2D player;
     private int rand;
     private bool spawned = false;
-    //private float waitTime = 3f;
 
     void Start()
     {
         variants = GameObject.FindGameObjectWithTag("Rooms").GetComponent<LevelVariants>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
-        //Destroy(gameObject, waitTime);
-        //Invoke("Spawn", 0.2f);
     }
 
     public void Spawn()

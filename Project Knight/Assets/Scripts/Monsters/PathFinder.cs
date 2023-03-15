@@ -16,7 +16,6 @@ public class PathFinder : MonoBehaviour
     public GameObject[] structures;
     public GameObject[] monsters;
     public GameObject[] banPosition;
-    //public Vector2[] movingPositions;
     private List<Vector2> movingPositions = new List<Vector2>();
 
 
@@ -114,44 +113,27 @@ public class PathFinder : MonoBehaviour
     lastPosition = startPosition;
             if (endPosition_.x < startPosition_.x)
             {
-                //targetPosition = new Vector2(startPosition_.x - 1, startPosition_.y);
-                //monsterScript.monsterPosition = lastPosition;
                 leftPosition = true;
             }
             if (endPosition_.x > startPosition_.x)
             {
-                //targetPosition = new Vector2(startPosition_.x + 1, startPosition_.y);
-                //monsterScript.monsterPosition = lastPosition;
                 rightPosition = true;
             }
             if (endPosition_.y < startPosition_.y)
             {
-                //targetPosition = new Vector2(startPosition_.x, startPosition_.y - 1);
-                //monsterScript.monsterPosition = lastPosition;
                 downPosition = true;
             }
             if (endPosition_.y > startPosition_.y)
             {
-                //targetPosition = new Vector2(startPosition_.x, startPosition_.y + 1);
-                //monsterScript.monsterPosition = lastPosition;
                 upPosition = true;
             }
-
-            //for (int i = 0; i < 4; i++)
-            //{
-            //    Vector2 tryPosition = new Vector2(0,0);
-            //    if (i == 0 && upPosition == true) { tryPosition = new Vector2(transform.position.x, transform.position.y + 1);}
-            //    if (i == 1 && downPosition == true) { tryPosition = new Vector2(transform.position.x, transform.position.y - 1);}
-            //    if (i == 2 && leftPosition == true) { tryPosition = new Vector2(transform.position.x - 1, transform.position.y);}
-            //    if (i == 3 && rightPosition == true) { tryPosition = new Vector2(transform.position.x + 1, transform.position.y);}
-            //}
 
             for (int i = 0; i < banPosition.Length; i++)
             {
                 if ((new Vector2(transform.position.x, transform.position.y + 1) == new Vector2(banPosition[i].transform.position.x, banPosition[i].transform.position.y) && upPosition == true) ||
                     (new Vector2(transform.position.x, transform.position.y - 1) == new Vector2(banPosition[i].transform.position.x, banPosition[i].transform.position.y) && downPosition == true) ||
                     (new Vector2(transform.position.x + 1, transform.position.y) == new Vector2(banPosition[i].transform.position.x, banPosition[i].transform.position.y) && rightPosition == true) ||
-                    (new Vector2(transform.position.x - 1, transform.position.y - 1) == new Vector2(banPosition[i].transform.position.x, banPosition[i].transform.position.y) && leftPosition == true))
+                    (new Vector2(transform.position.x - 1, transform.position.y) == new Vector2(banPosition[i].transform.position.x, banPosition[i].transform.position.y) && leftPosition == true))
                 {
                     Vector2 banPosition_ = new Vector2(banPosition[i].transform.position.x, banPosition[i].transform.position.y);
                     movingPositions.Remove(banPosition_);
@@ -198,7 +180,7 @@ public class PathFinder : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            monster.transform.position = lastPosition;
+            //monster.transform.position = lastPosition;
             endPosition = startPosition;
             player.GetComponent<HeroConroler>().endPosition = player.GetComponent<HeroConroler>().startPosition;
 
@@ -210,7 +192,7 @@ public class PathFinder : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            monster.transform.position = lastPosition;
+            //monster.transform.position = lastPosition;
             endPosition = startPosition;
             player.GetComponent<HeroConroler>().endPosition = player.GetComponent<HeroConroler>().startPosition;
 
