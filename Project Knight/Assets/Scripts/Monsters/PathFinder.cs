@@ -9,7 +9,7 @@ public class PathFinder : MonoBehaviour
     public Rigidbody2D monster;
     public BoxCollider2D worldCheck;
     public BasicMonster monsterScript;
-    public Rigidbody2D player;
+    public HeroConroler player;
     public WorldSettings worldSettings;
     public int move;
 
@@ -30,9 +30,10 @@ public class PathFinder : MonoBehaviour
     //позиции начал и конца движения персонажа
     public Vector2 startPosition;
     public Vector2 endPosition;
+
     public float time;
 
-    private Vector2 lastPosition;
+    public Vector2 lastPosition;
 
     public bool upPosition = false;
     public bool downPosition = false;
@@ -78,14 +79,14 @@ public class PathFinder : MonoBehaviour
         monster = GetComponent<Rigidbody2D>();
         monsterScript = GetComponent<BasicMonster>();
         worldSettings = GameObject.FindGameObjectWithTag("World Settings").GetComponent<WorldSettings>();
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<HeroConroler>();
         move = worldSettings.move;
 
         startPosition = transform.position;
         endPosition = transform.position;
     }
 
-    void Update()
+    void LateUpdate()
     {
         Move();
 
@@ -94,7 +95,7 @@ public class PathFinder : MonoBehaviour
         banPosition = structures.Concat(monsters).ToArray();
         if (move != worldSettings.move && isMoving == false)
         {
-            Vector2 endPosition_ = player.transform.position;
+            Vector2 endPosition_ = player.endPosition;
             Vector2 startPosition_ = transform.position;
             Vector2 targetPosition = new Vector2(0, 0);
 
@@ -182,7 +183,7 @@ public class PathFinder : MonoBehaviour
         {
             //monster.transform.position = lastPosition;
             endPosition = startPosition;
-            player.GetComponent<HeroConroler>().endPosition = player.GetComponent<HeroConroler>().startPosition;
+            //player.GetComponent<HeroConroler>().endPosition = player.GetComponent<HeroConroler>().startPosition;
 
             isReverse = true;
         }
@@ -194,7 +195,7 @@ public class PathFinder : MonoBehaviour
         {
             //monster.transform.position = lastPosition;
             endPosition = startPosition;
-            player.GetComponent<HeroConroler>().endPosition = player.GetComponent<HeroConroler>().startPosition;
+            //player.GetComponent<HeroConroler>().endPosition = player.GetComponent<HeroConroler>().startPosition;
 
             isReverse = true;
         }

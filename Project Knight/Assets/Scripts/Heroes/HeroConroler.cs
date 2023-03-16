@@ -7,7 +7,7 @@ using UnityEngine;
     public class HeroConroler : MonoBehaviour
 {
     //ссылка на Игрока и координаты тачей
-    public Rigidbody2D hero;
+    public Rigidbody2D player;
     public Vector2 touchStartPosition;
     public Vector2 touchEndPosition;
     public Vector2 touchfinalPosition;
@@ -34,7 +34,7 @@ using UnityEngine;
 
     private void WorldMove()
     {
-        if (lastMove_1 == false && lastMove_2 == true)
+        if (lastMove_1 == true && lastMove_2 == false)
         {
             worldSettings.move += 1;
         }
@@ -43,7 +43,7 @@ using UnityEngine;
     private void Move()
     {
         //проверка движения персонажа
-        if (endPosition != hero.position && isReverse == false)
+        if (endPosition != player.position && isReverse == false)
         {
             isMoving = true;
             lastMove_2 = lastMove_1;
@@ -53,10 +53,10 @@ using UnityEngine;
         if (isMoving == true && Mathf.Abs(last_dif_1) >= Mathf.Abs(last_dif_2))
         {
             speed = movemetCurve.Evaluate(time);
-            hero.position = Vector2.MoveTowards(hero.position, endPosition, speed * Time.fixedDeltaTime);
+            player.position = Vector2.MoveTowards(player.position, endPosition, speed * Time.fixedDeltaTime);
 
             last_dif_2 = last_dif_1;
-            last_dif_1 = Mathf.Abs((startPosition.x - hero.position.x) + (startPosition.y - hero.position.y));
+            last_dif_1 = Mathf.Abs((startPosition.x - player.position.x) + (startPosition.y - player.position.y));
 
             time += Time.deltaTime;
         }
@@ -64,14 +64,14 @@ using UnityEngine;
         else if (isMoving == true && Mathf.Abs(last_dif_1) < Mathf.Abs(last_dif_2))
         {
             speed = movemetCurve.Evaluate(time);
-            hero.transform.position = Vector2.MoveTowards(hero.position, startPosition, speed * Time.fixedDeltaTime);
+            player.transform.position = Vector2.MoveTowards(player.position, startPosition, speed * Time.fixedDeltaTime);
             time += Time.deltaTime;
             isReverse = true;
         }
         //проверка закончил ли персонаж движение
-        if (hero.position == endPosition && isReverse == false)
+        if (player.position == endPosition && isReverse == false)
         {
-            hero.position = endPosition;
+            player.position = endPosition;
 
             isMoving = false;
             isReverse = false;
@@ -82,9 +82,9 @@ using UnityEngine;
             lastMove_1 = isMoving;
         }
         //проверка вернулся ли персонаж на точку старта в случае столкновения с объектом
-        else if (hero.position == startPosition && isReverse == true)
+        else if (player.position == startPosition && isReverse == true)
         {
-            hero.position = endPosition;
+            player.position = endPosition;
 
             isMoving = false;
             isReverse = false;
@@ -100,10 +100,10 @@ using UnityEngine;
     //получает доступ к основному объекту для передвижения
     void Start()
     {
-        hero = GetComponent<Rigidbody2D>();
+        player = GetComponent<Rigidbody2D>();
         worldSettings = GameObject.FindGameObjectWithTag("World Settings").GetComponent<WorldSettings>();
         time = Time.fixedDeltaTime;
-        endPosition = hero.position;
+        endPosition = player.position;
         lastMove_2 = false;
         lastMove_1 = false;
     }
@@ -145,16 +145,16 @@ using UnityEngine;
                         {
                             if (isMoving == false)
                             {
-                                startPosition = hero.position;
-                                endPosition = hero.position - new Vector2(1, 0);
+                                startPosition = player.position;
+                                endPosition = player.position - new Vector2(1, 0);
                             }
                         }
                         else
                         {
                             if (isMoving == false)
                             {
-                                startPosition = hero.position;
-                                endPosition = hero.position + new Vector2(1, 0);
+                                startPosition = player.position;
+                                endPosition = player.position + new Vector2(1, 0);
                             }
                         }
                     }
@@ -164,24 +164,24 @@ using UnityEngine;
                         {
                             if (isMoving == false)
                             {
-                                startPosition = hero.position;
-                                endPosition = hero.position - new Vector2(0, 1);
+                                startPosition = player.position;
+                                endPosition = player.position - new Vector2(0, 1);
                             }
                         }
                         else
                         {
                             if (isMoving == false)
                             {
-                                startPosition = hero.position;
-                                endPosition = hero.position + new Vector2(0, 1);
+                                startPosition = player.position;
+                                endPosition = player.position + new Vector2(0, 1);
                             }
                         }
                     }
                 }
                 else
                 {
-                    lastMove_1 = false;
-                    lastMove_2 = true;
+                    lastMove_1 = true;
+                    lastMove_2 = false;
                     WorldMove();
                 }
             }
@@ -193,6 +193,47 @@ using UnityEngine;
         if (collision.gameObject.tag == "Structure")
         {
             endPosition = startPosition;
+        }
+        if (collision.gameObject.tag == "Monster")
+        {
+            if (player.position.y == (int)player.position.y && player.position.x == (int)player.position.x)
+            {
+                //BasicMonster monster = collision.gameObject.GetComponent<BasicMonster>();
+                HeroStats playerScript = GetComponent<HeroStats>();
+                BasicMonster monster = collision.gameObject.GetComponent<BasicMonster>();
+                playerScript.health -= monster.atackPoints;
+                Debug.Log("M to H " + playerScript.health);
+                //endPosition = startPosition;
+            }
+            else
+            {
+                PathFinder monsterScript = collision.gameObject.GetComponent<PathFinder>();
+                HeroStats playerScript = GetComponent<HeroStats>();
+                BasicMonster monster = collision.gameObject.GetComponent<BasicMonster>();
+                if (startPosition != endPosition)
+                {
+                    if (monsterScript.startPosition != endPosition)
+                    {
+
+                    }
+                    else
+                    {
+                        endPosition = startPosition;
+
+                        monster.healPoints -= playerScript.atack;
+                        if (monster.healPoints <= 0)
+                        {
+                            Destroy(collision.gameObject);
+                            Debug.Log("Destroy");
+                        }
+                        playerScript.health -= monster.atackPoints;
+                    }
+                }
+                else
+                {
+                    playerScript.health -= monster.atackPoints;
+                }
+            }
         }
     }
 }
