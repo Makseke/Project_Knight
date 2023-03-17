@@ -13,7 +13,7 @@ public class StructureSpawner : MonoBehaviour
     void Start()
     {
         random = Random.RandomRange(0, variants.Length);
-        structure = Instantiate(variants[random], transform.position, variants[random].transform.rotation);
+        structure = Instantiate(variants[random], new Vector3(transform.position.x, transform.position.y, -0.01f)  , variants[random].transform.rotation);
         structure.AddComponent<StructureDestroyer>();
         Destroy(gameObject);
     }

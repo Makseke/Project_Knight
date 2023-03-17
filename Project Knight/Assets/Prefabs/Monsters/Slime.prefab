@@ -544,8 +544,11 @@ MonoBehaviour:
   startPosition: {x: 0, y: 0}
   endPosition: {x: 0, y: 0}
   time: 0
-  last_dif_1: 0
-  last_dif_2: 0
+  lastPosition: {x: 0, y: 0}
+  upPosition: 0
+  downPosition: 0
+  rightPosition: 0
+  leftPosition: 0
 --- !u!114 &1222912601928305504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -610,7 +613,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.3}
+  m_Size: {x: 0.8, y: 0.8}
   m_EdgeRadius: 0
 --- !u!50 &8628782586027976688
 Rigidbody2D:

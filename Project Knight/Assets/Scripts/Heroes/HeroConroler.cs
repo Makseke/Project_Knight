@@ -111,6 +111,7 @@ using UnityEngine;
     void Update()
     {
         //вызов метода для движения
+        transform.position = new Vector3(transform.position.x, transform.position.y, -0.2f);
         Move();
         WorldMove();
         //проверка количества тачей
@@ -118,7 +119,6 @@ using UnityEngine;
             //начало нажатия
             if (Input.GetTouch(0).phase == TouchPhase.Began)
             {
-                //Debug.Log("start");
                 touchStartPosition = Input.GetTouch(0).position;
                 touchEndPosition = Input.GetTouch(0).position;
             }
@@ -130,7 +130,6 @@ using UnityEngine;
             //конец нажатия или ошибка определения
             else if (Input.GetTouch(0).phase == TouchPhase.Canceled || Input.GetTouch(0).phase == TouchPhase.Ended)
             {
-                //Debug.Log("end");
                 float x_dif = 0;
                 float y_dif = 0;
                 //высчитывается разница между x и y координатами начала и конца тача
@@ -198,12 +197,9 @@ using UnityEngine;
         {
             if (player.position.y == (int)player.position.y && player.position.x == (int)player.position.x)
             {
-                //BasicMonster monster = collision.gameObject.GetComponent<BasicMonster>();
                 HeroStats playerScript = GetComponent<HeroStats>();
                 BasicMonster monster = collision.gameObject.GetComponent<BasicMonster>();
                 playerScript.health -= monster.atackPoints;
-                Debug.Log("M to H " + playerScript.health);
-                //endPosition = startPosition;
             }
             else
             {
@@ -224,9 +220,11 @@ using UnityEngine;
                         if (monster.healPoints <= 0)
                         {
                             Destroy(collision.gameObject);
-                            Debug.Log("Destroy");
                         }
-                        playerScript.health -= monster.atackPoints;
+                        else
+                        {
+                            playerScript.health -= monster.atackPoints;
+                        }
                     }
                 }
                 else
