@@ -6,7 +6,6 @@ public class StructureSpawner : MonoBehaviour
 {
     public GameObject[] variants;
     public GameObject structure;
-    public Rigidbody2D player;
     private int random;
 
 

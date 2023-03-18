@@ -111,8 +111,8 @@ using UnityEngine;
     void Update()
     {
         //вызов метода для движения
-        transform.position = new Vector3(transform.position.x, transform.position.y, -0.2f);
         Move();
+        transform.position = new Vector3(transform.position.x, transform.position.y, -0.2f);
         WorldMove();
         //проверка количества тачей
         if (Input.touchCount == 1) {
@@ -192,6 +192,7 @@ using UnityEngine;
         if (collision.gameObject.tag == "Structure")
         {
             endPosition = startPosition;
+            transform.position = new Vector3(transform.position.x, transform.position.y, -0.2f);
         }
         if (collision.gameObject.tag == "Monster")
         {
@@ -215,7 +216,7 @@ using UnityEngine;
                     else
                     {
                         endPosition = startPosition;
-
+                        transform.position = new Vector3(transform.position.x, transform.position.y, -0.2f);
                         monster.healPoints -= playerScript.atack;
                         if (monster.healPoints <= 0)
                         {
