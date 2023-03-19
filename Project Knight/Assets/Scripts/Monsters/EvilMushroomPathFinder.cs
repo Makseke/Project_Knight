@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class PathFinder : MonoBehaviour
+public class EvilMushroomPathFinder : MonoBehaviour
 {
     public Rigidbody2D monster;
     public BoxCollider2D worldCheck;
@@ -15,7 +14,7 @@ public class PathFinder : MonoBehaviour
 
     public GameObject[] structures;
     public GameObject[] monsters;
-    //public GameObject[] banPosition;
+    public GameObject[] banPosition;
     private List<Vector2> movingPositions = new List<Vector2>();
 
 
@@ -72,20 +71,17 @@ public class PathFinder : MonoBehaviour
             endPosition = startPosition;
             time = Time.deltaTime;
         }
-        if (isMoving == false)
-        {
-            startPosition = new Vector2((int)startPosition.x, (int)startPosition.y);
-            endPosition = new Vector2((int)endPosition.x, (int)endPosition.y);
-        }
     }
 
     void PathFind()
     {
-        worldSettings.banPosition = FindObjectsOfType<GameObject>().Where(obj => obj.CompareTag("Structure") || obj.CompareTag("Monster")).ToArray();
-        GameObject[] structures = Physics2D.OverlapCircleAll(GameObject.FindGameObjectWithTag("Player").transform.position, 5f).Where(obj => obj.CompareTag("Structure")).Select(obj => obj.gameObject).ToArray();
+        structures = GameObject.FindGameObjectsWithTag("Structure");
+        monsters = GameObject.FindGameObjectsWithTag("Monster");
+        banPosition = structures.Concat(monsters).ToArray();
 
         Vector2 endPosition_ = player.endPosition;
         Vector2 startPosition_ = transform.position;
+        Vector2 targetPosition = new Vector2(0, 0);
 
         movingPositions.Clear();
         movingPositions.Add(new Vector2(transform.position.x, transform.position.y + 1));
@@ -100,46 +96,54 @@ public class PathFinder : MonoBehaviour
 
 
         lastPosition = startPosition;
-        leftPosition = endPosition_.x < startPosition_.x ? true : leftPosition;
-        rightPosition = endPosition_.x > startPosition_.x ? true : rightPosition;
-        downPosition = endPosition_.y < startPosition_.y ? true : downPosition;
-        upPosition = endPosition_.y > startPosition_.y ? true : upPosition;
-
-        for (int i = 0; i < worldSettings.banPosition.Length; i++)
+        if (endPosition_.x < startPosition_.x)
         {
-            if ((new Vector2(transform.position.x, transform.position.y + 1) == new Vector2(worldSettings.banPosition[i].transform.position.x, worldSettings.banPosition[i].transform.position.y)) ||
-                (new Vector2(transform.position.x, transform.position.y - 1) == new Vector2(worldSettings.banPosition[i].transform.position.x, worldSettings.banPosition[i].transform.position.y)) ||
-                (new Vector2(transform.position.x + 1, transform.position.y) == new Vector2(worldSettings.banPosition[i].transform.position.x, worldSettings.banPosition[i].transform.position.y)) ||
-                (new Vector2(transform.position.x - 1, transform.position.y) == new Vector2(worldSettings.banPosition[i].transform.position.x, worldSettings.banPosition[i].transform.position.y)))
+            leftPosition = true;
+        }
+        if (endPosition_.x > startPosition_.x)
+        {
+            rightPosition = true;
+        }
+        if (endPosition_.y < startPosition_.y)
+        {
+            downPosition = true;
+        }
+        if (endPosition_.y > startPosition_.y)
+        {
+            upPosition = true;
+        }
+
+        for (int i = 0; i < banPosition.Length; i++)
+        {
+            if ((new Vector2(transform.position.x, transform.position.y + 1) == new Vector2(banPosition[i].transform.position.x, banPosition[i].transform.position.y) && upPosition == true) ||
+                (new Vector2(transform.position.x, transform.position.y - 1) == new Vector2(banPosition[i].transform.position.x, banPosition[i].transform.position.y) && downPosition == true) ||
+                (new Vector2(transform.position.x + 1, transform.position.y) == new Vector2(banPosition[i].transform.position.x, banPosition[i].transform.position.y) && rightPosition == true) ||
+                (new Vector2(transform.position.x - 1, transform.position.y) == new Vector2(banPosition[i].transform.position.x, banPosition[i].transform.position.y) && leftPosition == true))
             {
-                Vector2 banPosition_ = new Vector2(worldSettings.banPosition[i].transform.position.x, worldSettings.banPosition[i].transform.position.y);
+                Vector2 banPosition_ = new Vector2(banPosition[i].transform.position.x, banPosition[i].transform.position.y);
                 movingPositions.Remove(banPosition_);
             }
         }
 
-        //если игрок находится в "зоне видимости" прокладывает маршрут в его строну, иначе ходит в случайных доступных направлениях
-        if (Mathf.Abs(player.transform.position.y - transform.position.y) <= 5)
+        if (upPosition == false)
         {
-            if (upPosition == false)
-            {
-                Vector2 banPosition_ = new Vector2(transform.position.x, transform.position.y + 1);
-                movingPositions.Remove(banPosition_);
-            }
-            if (downPosition == false)
-            {
-                Vector2 banPosition_ = new Vector2(transform.position.x, transform.position.y - 1);
-                movingPositions.Remove(banPosition_);
-            }
-            if (rightPosition == false)
-            {
-                Vector2 banPosition_ = new Vector2(transform.position.x + 1, transform.position.y);
-                movingPositions.Remove(banPosition_);
-            }
-            if (leftPosition == false)
-            {
-                Vector2 banPosition_ = new Vector2(transform.position.x - 1, transform.position.y);
-                movingPositions.Remove(banPosition_);
-            }
+            Vector2 banPosition_ = new Vector2(transform.position.x, transform.position.y + 1);
+            movingPositions.Remove(banPosition_);
+        }
+        if (downPosition == false)
+        {
+            Vector2 banPosition_ = new Vector2(transform.position.x, transform.position.y - 1);
+            movingPositions.Remove(banPosition_);
+        }
+        if (rightPosition == false)
+        {
+            Vector2 banPosition_ = new Vector2(transform.position.x + 1, transform.position.y);
+            movingPositions.Remove(banPosition_);
+        }
+        if (leftPosition == false)
+        {
+            Vector2 banPosition_ = new Vector2(transform.position.x - 1, transform.position.y);
+            movingPositions.Remove(banPosition_);
         }
 
         if (isMoving == false) startPosition = monster.position;
@@ -187,17 +191,18 @@ public class PathFinder : MonoBehaviour
         if (collision.gameObject.tag == "Monster")
         {
             PathFinder monster = collision.gameObject.GetComponent<PathFinder>();
-            if (GetComponent<Transform>().gameObject.GetInstanceID() > collision.gameObject.GetComponent<Transform>().gameObject.GetInstanceID())
+            if (Random.RandomRange(0, 1000) > Random.RandomRange(0, 1000))
             {
                 endPosition = startPosition;
                 isReverse = true;
+
             }
             else
             {
                 monster.endPosition = monster.startPosition;
                 monster.isReverse = true;
+
             }
         }
     }
 }
-

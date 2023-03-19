@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-//using TreeEditor;
-using Unity.VisualScripting;
 using UnityEngine;
 
     public class HeroConroler : MonoBehaviour
@@ -95,6 +91,11 @@ using UnityEngine;
             lastMove_2 = lastMove_1;
             lastMove_1 = isMoving;
         }
+        if (isMoving == false)
+        {
+            startPosition = new Vector2((int)startPosition.x, (int)startPosition.y);
+            endPosition = new Vector2((int)endPosition.x, (int)endPosition.y);
+        }
     }
 
     //получает доступ к основному объекту дл€ передвижени€
@@ -138,42 +139,18 @@ using UnityEngine;
                 //задаетс€ вектор движени€
                 if (x_dif > 100 || y_dif > 100)
                 {
-                    if (x_dif > y_dif)
+                    if (isMoving == false)
                     {
-                        if (touchStartPosition.x > touchEndPosition.x)
+                        startPosition = player.position;
+                        endPosition = player.position;
+
+                        if (x_dif > y_dif)
                         {
-                            if (isMoving == false)
-                            {
-                                startPosition = player.position;
-                                endPosition = player.position - new Vector2(1, 0);
-                            }
+                            endPosition.x = touchStartPosition.x > touchEndPosition.x ? player.position.x - 1 : player.position.x + 1;
                         }
                         else
                         {
-                            if (isMoving == false)
-                            {
-                                startPosition = player.position;
-                                endPosition = player.position + new Vector2(1, 0);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        if (touchStartPosition.y > touchEndPosition.y)
-                        {
-                            if (isMoving == false)
-                            {
-                                startPosition = player.position;
-                                endPosition = player.position - new Vector2(0, 1);
-                            }
-                        }
-                        else
-                        {
-                            if (isMoving == false)
-                            {
-                                startPosition = player.position;
-                                endPosition = player.position + new Vector2(0, 1);
-                            }
+                            endPosition.y = touchStartPosition.y > touchEndPosition.y ? player.position.y - 1 : player.position.y + 1;
                         }
                     }
                 }
@@ -189,21 +166,26 @@ using UnityEngine;
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
+        // ѕровер€ем тэг объекта, на который игрок наткнулс€
         if (collision.gameObject.tag == "Structure")
         {
+            // ≈сли это структура, то игрок не может двигатьс€ и перемещаетс€ обратно на стартовую позицию
             endPosition = startPosition;
             transform.position = new Vector3(transform.position.x, transform.position.y, -0.2f);
         }
-        if (collision.gameObject.tag == "Monster")
+        else if (collision.gameObject.tag == "Monster")
         {
+            // ≈сли это монстр, то провер€ем, находитс€ ли игрок на целочисленных координатах
             if (player.position.y == (int)player.position.y && player.position.x == (int)player.position.x)
             {
+                // ≈сли на целочисленных координатах, то атакуем монстра
                 HeroStats playerScript = GetComponent<HeroStats>();
                 BasicMonster monster = collision.gameObject.GetComponent<BasicMonster>();
                 playerScript.health -= monster.atackPoints;
             }
             else
             {
+                // ≈сли на дробных координатах, то начинаем поиск пути к монстру и провер€ем путь на наличие преп€тствий
                 PathFinder monsterScript = collision.gameObject.GetComponent<PathFinder>();
                 HeroStats playerScript = GetComponent<HeroStats>();
                 BasicMonster monster = collision.gameObject.GetComponent<BasicMonster>();
@@ -211,10 +193,11 @@ using UnityEngine;
                 {
                     if (monsterScript.startPosition != endPosition)
                     {
-
+                        // ≈сли путь свободен, то двигаемс€ к монстру
                     }
                     else
                     {
+                        // ≈сли путь заблокирован, то игрок перемещаетс€ обратно на стартовую позицию и атакует монстра
                         endPosition = startPosition;
                         transform.position = new Vector3(transform.position.x, transform.position.y, -0.2f);
                         monster.healPoints -= playerScript.atack;
@@ -230,11 +213,13 @@ using UnityEngine;
                 }
                 else
                 {
+                    // ≈сли игрок не двигалс€, то при взаимодейтвии с монстром монстр наносит урон игроку
                     playerScript.health -= monster.atackPoints;
                 }
             }
         }
     }
+
 }
 
 

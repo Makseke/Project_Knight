@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1dd4dcc9cb925f543bec654db984571c
+guid: 21722abb196347048b22534f18ce6bc4
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -131,7 +131,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ForestAssetsPack_1_0
+      name: EvilMushroomSpore_0
       rect:
         serializedVersion: 2
         x: 0
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc557fa094f4aee48b53c9e00113224f
-      internalID: 2090463778
+      spriteID: 851e8cfe74f019640ae0f551279be0b3
+      internalID: 1089941253
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ForestAssetsPack_1_1
+      name: EvilMushroomSpore_1
       rect:
         serializedVersion: 2
         x: 160
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd0ae9a985aabaf4a80efc34c7b94a4d
-      internalID: 1085834273
+      spriteID: 7c078230251c71c4fbc8b6de0a829c21
+      internalID: -219006174
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ForestAssetsPack_1_2
+      name: EvilMushroomSpore_2
       rect:
         serializedVersion: 2
         x: 320
@@ -187,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8fe552ab603dc274cb544b13ecc789e3
-      internalID: -1976206404
+      spriteID: 291199752dd318040948d460d92fa8b6
+      internalID: 1697136565
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ForestAssetsPack_1_3
+      name: EvilMushroomSpore_3
       rect:
         serializedVersion: 2
         x: 480
@@ -208,29 +208,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e0a6264954a24ac4ebb21de163f04987
-      internalID: 479034339
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ForestAssetsPack_1_4
-      rect:
-        serializedVersion: 2
-        x: 640
-        y: 0
-        width: 160
-        height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0a1420817289c20428a0aa16bf3ac30e
-      internalID: 2093358334
+      spriteID: 3a270dc395cf1cf46a9ad477444d53c8
+      internalID: -342803868
       vertices: []
       indices: 
       edges: []
@@ -246,11 +225,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      ForestAssetsPack_1_2: -1976206404
-      ForestAssetsPack_1_1: 1085834273
-      ForestAssetsPack_1_4: 2093358334
-      ForestAssetsPack_1_0: 2090463778
-      ForestAssetsPack_1_3: 479034339
+      EvilMushroomSpore_1: -219006174
+      EvilMushroomSpore_3: -342803868
+      EvilMushroomSpore_0: 1089941253
+      EvilMushroomSpore_2: 1697136565
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

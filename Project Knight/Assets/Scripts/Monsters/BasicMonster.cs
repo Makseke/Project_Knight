@@ -39,13 +39,13 @@ public class BasicMonster : MonoBehaviour
     void Update()
     {
         //автоматическое удаление если игрок ушел слишком далеко
-        if (player.transform.position.y > monster.transform.position.y + 33)
+        if (player.transform.position.y > monster.transform.position.y + 21)
         {
             Destroy(gameObject);
         }
         //отображение значений здоровья врагов
         hp.text = healPoints.ToString();
-        if ((Mathf.Abs(player.transform.position.y - monster.transform.position.y)) <= 1 && (Mathf.Abs(player.transform.position.x - monster.transform.position.x) <= 1))
+        if ((Mathf.Abs(player.transform.position.y - monster.transform.position.y)) <= 1.5f && (Mathf.Abs(player.transform.position.x - monster.transform.position.x) <= 1.5f))
         {
             hp.gameObject.SetActive(true);
             maxHp.gameObject.SetActive(true);

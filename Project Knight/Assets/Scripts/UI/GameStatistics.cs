@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
-using UnityEngine.VFX;
 
 public class GameStatistics : MonoBehaviour
 {
@@ -15,9 +11,7 @@ public class GameStatistics : MonoBehaviour
     //Вывод Score на экран
     void OnGUI()
     {
-        
         GUI.Label(new Rect(460, 100, 150, 100), "Score: " + score);
-
     }
 
     private void Start()

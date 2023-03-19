@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class LevelVariants : MonoBehaviour
 {
-    public GameObject[] basicRooms;
+    public GameObject[] ForestTiles;
 }

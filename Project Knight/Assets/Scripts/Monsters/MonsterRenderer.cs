@@ -17,5 +17,9 @@ public class MonsterRenderer : MonoBehaviour
         {
             renderer.sprite = monsterSptite[0];
         }
+        else
+        {
+            renderer.sprite = monsterSptite[1];
+        }
     }
 }

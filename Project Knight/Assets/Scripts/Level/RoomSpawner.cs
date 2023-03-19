@@ -19,8 +19,8 @@ public class RoomSpawner : MonoBehaviour
     {
         if (!spawned)
         {
-            rand = Random.RandomRange(0, variants.basicRooms.Length);
-            Instantiate(variants.basicRooms[rand], transform.position, variants.basicRooms[rand].transform.rotation);
+            rand = Random.RandomRange(0, variants.ForestTiles.Length);
+            Instantiate(variants.ForestTiles[rand], transform.position, variants.ForestTiles[rand].transform.rotation);
             spawned = true;
         }
     }
