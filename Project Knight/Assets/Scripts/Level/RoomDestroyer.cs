@@ -14,7 +14,7 @@ public class RoomDestroyer : MonoBehaviour
 
     void Update()
     {
-        if (player.position.y > transform.position.y + 21)
+        if (player.position.y > transform.position.y + 20)
         {
             Destroy(gameObject);
         }

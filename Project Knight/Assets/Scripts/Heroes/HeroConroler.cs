@@ -96,6 +96,7 @@ using UnityEngine;
             startPosition = new Vector2((int)startPosition.x, (int)startPosition.y);
             endPosition = new Vector2((int)endPosition.x, (int)endPosition.y);
         }
+        if (endPosition.x + 1 == 7 || endPosition.x - 1 == -7) endPosition = startPosition;
     }
 
     //получает доступ к основному объекту для передвижения
@@ -204,6 +205,7 @@ using UnityEngine;
                         if (monster.healPoints <= 0)
                         {
                             Destroy(collision.gameObject);
+                            worldSettings.monsterCount--;
                         }
                         else
                         {

@@ -13,7 +13,7 @@ public class StructureDestroyer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player.position.y > transform.position.y + 20)
+        if (player.position.y > transform.position.y + 15)
         {
             Destroy(gameObject);
         }

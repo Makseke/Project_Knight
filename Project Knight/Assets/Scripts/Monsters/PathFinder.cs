@@ -1,21 +1,19 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PathFinder : MonoBehaviour
 {
-    public Rigidbody2D monster;
-    public BoxCollider2D worldCheck;
-    public BasicMonster monsterScript;
-    public HeroConroler player;
-    public WorldSettings worldSettings;
+    private Rigidbody2D monster;
+    private BoxCollider2D worldCheck;
+    private BasicMonster monsterScript;
+    private HeroConroler player;
+    private WorldSettings worldSettings;
     public int move;
 
-    public GameObject[] structures;
+    //public GameObject[] structures;
     public GameObject[] monsters;
-    //public GameObject[] banPosition;
+    public List<Vector2> stayPosition = new List<Vector2>();
     private List<Vector2> movingPositions = new List<Vector2>();
 
 
@@ -31,14 +29,17 @@ public class PathFinder : MonoBehaviour
     public Vector2 startPosition;
     public Vector2 endPosition;
 
-    public float time;
+    private float time;
 
     public Vector2 lastPosition;
 
-    public bool upPosition = false;
-    public bool downPosition = false;
-    public bool rightPosition = false;
-    public bool leftPosition = false;
+    private bool upPosition = false;
+    private bool downPosition = false;
+    private bool rightPosition = false;
+    private bool leftPosition = false;
+
+    private int toBanPosition = 0;
+    private int toUnBanPosition = 0;
 
     private void Move()
     {
@@ -82,24 +83,46 @@ public class PathFinder : MonoBehaviour
     void PathFind()
     {
         worldSettings.banPosition = FindObjectsOfType<GameObject>().Where(obj => obj.CompareTag("Structure") || obj.CompareTag("Monster")).ToArray();
-        GameObject[] structures = Physics2D.OverlapCircleAll(GameObject.FindGameObjectWithTag("Player").transform.position, 5f).Where(obj => obj.CompareTag("Structure")).Select(obj => obj.gameObject).ToArray();
+        //GameObject[] structures = Physics2D.OverlapCircleAll(GameObject.FindGameObjectWithTag("Player").transform.position, 5f).Where(obj => obj.CompareTag("Structure")).Select(obj => obj.gameObject).ToArray();
 
         Vector2 endPosition_ = player.endPosition;
         Vector2 startPosition_ = transform.position;
 
+        if (stayPosition.Count != 0)
+        {
+            if (toUnBanPosition == 7)
+            {
+                stayPosition.Remove(stayPosition.First());
+                toUnBanPosition = 0;
+                Debug.Log("UNBAN");
+            }
+            toUnBanPosition++;
+        }
+
         movingPositions.Clear();
         movingPositions.Add(new Vector2(transform.position.x, transform.position.y + 1));
         movingPositions.Add(new Vector2(transform.position.x, transform.position.y - 1));
-        movingPositions.Add(new Vector2(transform.position.x + 1, transform.position.y));
-        movingPositions.Add(new Vector2(transform.position.x - 1, transform.position.y));
+        if (transform.position.x + 1 != 6) movingPositions.Add(new Vector2(transform.position.x + 1, transform.position.y));
+        if (transform.position.x - 1 != -6) movingPositions.Add(new Vector2(transform.position.x - 1, transform.position.y));
 
         upPosition = false;
         downPosition = false;
         rightPosition = false;
         leftPosition = false;
 
+        for (int i = 0; i < stayPosition.Count; i++)
+        {
+            if (startPosition == stayPosition[i])
+            {
+                upPosition = true;
+                downPosition = true;
+                rightPosition = true;
+                leftPosition = true;
+            }
+        }
 
-        lastPosition = startPosition;
+
+            lastPosition = startPosition;
         leftPosition = endPosition_.x < startPosition_.x ? true : leftPosition;
         rightPosition = endPosition_.x > startPosition_.x ? true : rightPosition;
         downPosition = endPosition_.y < startPosition_.y ? true : downPosition;
@@ -116,6 +139,19 @@ public class PathFinder : MonoBehaviour
                 movingPositions.Remove(banPosition_);
             }
         }
+
+        for (int i = 0; i < stayPosition.Count; i++)
+        {
+            if ((new Vector2(transform.position.x, transform.position.y + 1) == new Vector2(stayPosition[i].x, stayPosition[i].y)) ||
+                (new Vector2(transform.position.x, transform.position.y - 1) == new Vector2(stayPosition[i].x, stayPosition[i].y)) ||
+                (new Vector2(transform.position.x + 1, transform.position.y) == new Vector2(stayPosition[i].x, stayPosition[i].y)) ||
+                (new Vector2(transform.position.x - 1, transform.position.y) == new Vector2(stayPosition[i].x, stayPosition[i].y)))
+            {
+                Vector2 banPosition_ = new Vector2(stayPosition[i].x, stayPosition[i].y);
+                movingPositions.Remove(banPosition_);
+            }
+        }
+
 
         //если игрок находится в "зоне видимости" прокладывает маршрут в его строну, иначе ходит в случайных доступных направлениях
         if (Mathf.Abs(player.transform.position.y - transform.position.y) <= 5)
@@ -145,11 +181,16 @@ public class PathFinder : MonoBehaviour
         if (isMoving == false) startPosition = monster.position;
         if (movingPositions.Count != 0)
         {
-            endPosition = movingPositions[Random.RandomRange(0, movingPositions.Count)];
+            endPosition = movingPositions[Random.Range(0, movingPositions.Count)];
         }
         else
         {
             endPosition = startPosition;
+            if (Mathf.Abs(player.startPosition.x - transform.position.x) > 1.5f || Mathf.Abs(player.startPosition.y - transform.position.y) > 1.5f)
+            {
+                stayPosition.Add(startPosition);
+                Debug.Log("banAdd");
+            }
         }
         move++;
     }

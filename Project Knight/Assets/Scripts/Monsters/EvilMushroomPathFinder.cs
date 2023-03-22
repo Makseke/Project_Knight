@@ -149,7 +149,7 @@ public class EvilMushroomPathFinder : MonoBehaviour
         if (isMoving == false) startPosition = monster.position;
         if (movingPositions.Count != 0)
         {
-            endPosition = movingPositions[Random.RandomRange(0, movingPositions.Count)];
+            endPosition = movingPositions[Random.Range(0, movingPositions.Count)];
         }
         else
         {
@@ -191,7 +191,7 @@ public class EvilMushroomPathFinder : MonoBehaviour
         if (collision.gameObject.tag == "Monster")
         {
             PathFinder monster = collision.gameObject.GetComponent<PathFinder>();
-            if (Random.RandomRange(0, 1000) > Random.RandomRange(0, 1000))
+            if (Random.Range(0, 1000) > Random.Range(0, 1000))
             {
                 endPosition = startPosition;
                 isReverse = true;

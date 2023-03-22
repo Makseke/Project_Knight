@@ -9,6 +9,7 @@ public class WorldSettings : MonoBehaviour
     public int difficult;
     public string biom;
     public int move;
+    public int monsterCount;
 
     public GameObject[] banPosition;
 
@@ -17,6 +18,7 @@ public class WorldSettings : MonoBehaviour
     {
         move = 0;
         difficult = 0;
+        monsterCount = 0;
         if (difficult == 0)
         {
             biom = "forest";

@@ -39,9 +39,10 @@ public class BasicMonster : MonoBehaviour
     void Update()
     {
         //автоматическое удаление если игрок ушел слишком далеко
-        if (player.transform.position.y > monster.transform.position.y + 21)
+        if (player.transform.position.y > monster.transform.position.y + 15)
         {
             Destroy(gameObject);
+            GameObject.FindGameObjectWithTag("World Settings").GetComponent<WorldSettings>().monsterCount--;
         }
         //отображение значений здоровья врагов
         hp.text = healPoints.ToString();
