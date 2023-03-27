@@ -7,6 +7,7 @@ using UnityEngine;
     public Vector2 touchStartPosition;
     public Vector2 touchEndPosition;
     public Vector2 touchfinalPosition;
+    public float touchTime;
 
     //переменные для определения скорости движения
     private float speed;
@@ -27,6 +28,8 @@ using UnityEngine;
     private WorldSettings worldSettings;
     private bool lastMove_1;
     private bool lastMove_2;
+
+    public GameObject[] skill_1_Positions;
 
     private void WorldMove()
     {
@@ -85,6 +88,7 @@ using UnityEngine;
             isMoving = false;
             isReverse = false;
             time = 0.0f;
+            touchTime = 0.0f;
             endPosition = startPosition;
             last_dif_1 = 0.0f;
             last_dif_2 = 0.0f;
@@ -108,6 +112,7 @@ using UnityEngine;
         endPosition = player.position;
         lastMove_2 = false;
         lastMove_1 = false;
+        for (int i = 0; i < skill_1_Positions.Length; i++) skill_1_Positions[i].active = false;
     }
 
     void Update()
@@ -123,11 +128,17 @@ using UnityEngine;
             {
                 touchStartPosition = Input.GetTouch(0).position;
                 touchEndPosition = Input.GetTouch(0).position;
+                touchTime += Time.deltaTime;
             }
             //процесс нажатия
             else if (Input.GetTouch(0).phase == TouchPhase.Moved)
             {
                 touchEndPosition = Input.GetTouch(0).position;
+                touchTime += Time.deltaTime;
+            }
+            else if (Input.GetTouch(0).phase == TouchPhase.Stationary)
+            {
+                touchTime += Time.deltaTime;
             }
             //конец нажатия или ошибка определения
             else if (Input.GetTouch(0).phase == TouchPhase.Canceled || Input.GetTouch(0).phase == TouchPhase.Ended)
@@ -161,7 +172,16 @@ using UnityEngine;
                     lastMove_2 = false;
                     WorldMove();
                 }
+                touchTime = 0.0f;
             }
+            if (touchTime > 0.5f)
+            {
+                for(int i = 0; i < skill_1_Positions.Length; i++)
+                {
+                    skill_1_Positions[i].active = true;
+                }
+            }
+            else for (int i = 0; i < skill_1_Positions.Length; i++){ skill_1_Positions[i].active = false; }
         }
     }
 
