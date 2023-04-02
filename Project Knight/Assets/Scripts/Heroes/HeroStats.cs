@@ -10,13 +10,21 @@ public class HeroStats : MonoBehaviour
     private Rigidbody2D player;
     private HeroConroler playerScript;
     private Collider2D playerCollider;
+
     public int health;
     public int healthMAX;
+
+    public int magic;
+    public int magicMAX;
+
     public int atack;
     public int level;
 
     public TextMeshProUGUI hp;
     public TextMeshProUGUI hpMAX;
+
+    public TextMeshProUGUI mana;
+    public TextMeshProUGUI manaMAX;
 
 
     void Start()
@@ -24,8 +32,13 @@ public class HeroStats : MonoBehaviour
         player = GetComponent<Rigidbody2D>();
         playerScript = GetComponent<HeroConroler>();
         playerCollider = GetComponent<Collider2D>();
+
         healthMAX = 100;
         health = healthMAX;
+
+        magicMAX = 100;
+        magic = magicMAX;
+
         atack = 20;
     }
 
@@ -33,5 +46,7 @@ public class HeroStats : MonoBehaviour
     {
         hp.text = health.ToString();
         hpMAX.text = healthMAX.ToString();
+        mana.text = magic.ToString();
+        manaMAX.text = magicMAX.ToString();
     }
 }
